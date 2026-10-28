@@ -16,7 +16,8 @@
       "cards",
       "columns",
       "fragment",
-      "carousel"
+      "carousel",
+      "product-search"
     ]
   },
   {
@@ -39,5 +40,11 @@
       "button",
       "title"
     ]
-  }
+  },
+  {
+  "id": "product-search",
+  "components": [
+    "product-search"
+  ]
+}
 ]

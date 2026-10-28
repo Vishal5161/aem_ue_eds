@@ -240,5 +240,24 @@
           "valueType": "string"
         }
       ]
+    },
+    {
+  "id": "product-search",
+  "fields": [
+    {
+      "component": "text",
+      "name": "placeholder",
+      "label": "Search Placeholder",
+      "value": "Search products...",
+      "required": true
+    },
+    {
+      "component": "text",
+      "name": "buttonText",
+      "label": "Button Text",
+      "value": "Search",
+      "required": true
     }
+  ]
+}
 ]
