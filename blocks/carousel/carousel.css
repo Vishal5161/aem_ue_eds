@@ -1,0 +1,126 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 24px;
+}
+
+.carousel .carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+  border: 2px solid #292929;
+  border-radius: 32px;
+  background: #fff;
+}
+
+.carousel .carousel-track {
+  display: flex;
+  width: 100%;
+  transition: transform 350ms ease-in-out;
+  will-change: transform;
+}
+
+.carousel .carousel-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 32px;
+}
+
+.carousel .carousel-slide picture,
+.carousel .carousel-slide img {
+  display: block;
+  max-width: 100%;
+}
+
+.carousel .carousel-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Navigation arrows */
+.carousel .carousel-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: #222;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.carousel .carousel-arrow-prev {
+  left: -12px;
+}
+
+.carousel .carousel-arrow-next {
+  right: -12px;
+}
+
+.carousel .carousel-arrow svg {
+  display: block;
+  width: 40px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.carousel .carousel-arrow:hover {
+  color: #168b36;
+}
+
+.carousel .carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.carousel .carousel-arrow:focus-visible {
+  outline: 2px solid #168b36;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+  .carousel {
+    padding: 0 16px;
+  }
+
+  .carousel .carousel-viewport {
+    border-radius: 22px;
+  }
+
+  .carousel .carousel-slide {
+    padding: 20px;
+  }
+
+  .carousel .carousel-arrow {
+    width: 36px;
+    height: 40px;
+  }
+
+  .carousel .carousel-arrow-prev {
+    left: -10px;
+  }
+
+  .carousel .carousel-arrow-next {
+    right: -10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel .carousel-track {
+    transition: none;
+  }
+}
