@@ -1,8 +1,9 @@
+
 /*
  * Upcoming Events block
  *
  * Row 1: Section heading | See all events link
- * Rows 2+: Image | Category | Date | Title | Event link
+ * Rows 2+: Image | Date | Title | Event link
  */
 
 function getCellText(cell) {
@@ -22,9 +23,9 @@ export default function decorate(block) {
 
   if (!rows.length) return;
 
-  // Read the heading and CTA from the first row.
+  // First row contains the section heading and CTA.
   const headerCells = [...rows[0].children];
-  const heading = getCellText(headerCells[0]) || 'Upcoming events';
+  const heading = getCellText(headerCells[0]) || 'Upcoming Events';
   const headerLink = getCellLink(headerCells[1]);
 
   const sectionHeader = document.createElement('div');
@@ -38,9 +39,6 @@ export default function decorate(block) {
     const cta = document.createElement('a');
     cta.className = 'upcoming-events-all-link';
     cta.href = headerLink.href;
-    cta.textContent = getCellText(headerCells[1]) || 'See all events';
-    cta.setAttribute('aria-label', cta.textContent);
-    cta.innerHTML = '';
 
     const label = document.createElement('span');
     label.textContent = getCellText(headerCells[1]) || 'See all events';
@@ -50,6 +48,7 @@ export default function decorate(block) {
     arrow.setAttribute('aria-hidden', 'true');
     arrow.textContent = '→';
 
+    cta.setAttribute('aria-label', label.textContent);
     cta.append(label, arrow);
     sectionHeader.append(cta);
   }
@@ -57,13 +56,12 @@ export default function decorate(block) {
   const cards = document.createElement('div');
   cards.className = 'upcoming-events-cards';
 
-  // Convert each remaining row into an event card.
+  // Remaining rows contain event data.
   rows.slice(1).forEach((row) => {
     const cells = [...row.children];
-
     if (!cells.length) return;
 
-    const [imageCell, categoryCell, dateCell, titleCell, linkCell] = cells;
+    const [imageCell, dateCell, titleCell, linkCell] = cells;
 
     const card = document.createElement('article');
     card.className = 'upcoming-event-card';
@@ -74,14 +72,6 @@ export default function decorate(block) {
     const picture = getCellImage(imageCell);
     if (picture) {
       imageArea.append(picture.cloneNode(true));
-    }
-
-    const category = getCellText(categoryCell);
-    if (category) {
-      const badge = document.createElement('span');
-      badge.className = 'upcoming-event-category';
-      badge.textContent = category;
-      imageArea.append(badge);
     }
 
     card.append(imageArea);
