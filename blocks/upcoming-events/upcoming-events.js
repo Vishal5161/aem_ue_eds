@@ -1,117 +1,104 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /*
- * Upcoming Events block
+ * Upcoming Events block (Universal Editor / xwalk)
  *
- * Row 1: Section heading | See all events link
- * Rows 2+: Image | Date | Title | Event link
+ * Authored structure (one row per model field for the container,
+ * one row per item, one cell per item field):
+ *   Row 1:   heading                         (1 cell)
+ *   Row 2:   see-all link                    (1 cell)
+ *   Row 3:   see-all link text               (1 cell)
+ *   Rows 4+: image | date | title | link     (4 cells, one row per event)
  */
 
-function getCellText(cell) {
-  return cell?.textContent?.trim() || '';
-}
-
-function getCellLink(cell) {
-  return cell?.querySelector('a') || null;
-}
-
-function getCellImage(cell) {
-  return cell?.querySelector('picture') || null;
-}
+const text = (cell) => cell?.textContent?.trim() || '';
 
 export default function decorate(block) {
   const rows = [...block.children];
-
   if (!rows.length) return;
 
-  // First row contains the section heading and CTA.
-  const headerCells = [...rows[0].children];
-  const heading = getCellText(headerCells[0]) || 'Upcoming Events';
-  const headerLink = getCellLink(headerCells[1]);
+  // Event rows have several cells; container-level config rows have one.
+  const isEventRow = (row) => row.children.length > 1;
+  const configRows = rows.filter((row) => !isEventRow(row));
+  const eventRows = rows.filter(isEventRow);
 
-  const sectionHeader = document.createElement('div');
-  sectionHeader.className = 'upcoming-events-header';
+  const [headingRow, linkRow, linkTextRow] = configRows;
+  const heading = text(headingRow) || 'Upcoming events';
+  const headerLink = linkRow?.querySelector('a');
+  const linkLabel = text(linkTextRow) || 'See all events';
 
-  const headingElement = document.createElement('h2');
-  headingElement.textContent = heading;
-  sectionHeader.append(headingElement);
+  const header = document.createElement('div');
+  header.className = 'upcoming-events-header';
+  const h2 = document.createElement('h2');
+  h2.textContent = heading;
+  if (headingRow) moveInstrumentation(headingRow, h2);
+  header.append(h2);
 
   if (headerLink) {
     const cta = document.createElement('a');
     cta.className = 'upcoming-events-all-link';
     cta.href = headerLink.href;
-
+    cta.setAttribute('aria-label', linkLabel);
     const label = document.createElement('span');
-    label.textContent = getCellText(headerCells[1]) || 'See all events';
-
+    label.textContent = linkLabel;
     const arrow = document.createElement('span');
     arrow.className = 'upcoming-events-arrow';
     arrow.setAttribute('aria-hidden', 'true');
     arrow.textContent = '→';
-
-    cta.setAttribute('aria-label', label.textContent);
     cta.append(label, arrow);
-    sectionHeader.append(cta);
+    header.append(cta);
   }
 
   const cards = document.createElement('div');
   cards.className = 'upcoming-events-cards';
 
-  // Remaining rows contain event data.
-  rows.slice(1).forEach((row) => {
-    const cells = [...row.children];
-    if (!cells.length) return;
+  eventRows.forEach((row) => {
+    const [imageCell, dateCell, titleCell, linkCell] = [...row.children];
 
-    const [imageCell, dateCell, titleCell, linkCell] = cells;
-
+    // Keep data-aue-* on the card so each event stays selectable/movable in the editor.
     const card = document.createElement('article');
     card.className = 'upcoming-event-card';
+    moveInstrumentation(row, card);
 
     const imageArea = document.createElement('div');
     imageArea.className = 'upcoming-event-image';
-
-    const picture = getCellImage(imageCell);
-    if (picture) {
-      imageArea.append(picture.cloneNode(true));
-    }
-
+    const picture = imageCell?.querySelector('picture');
+    if (picture) imageArea.append(picture);
     card.append(imageArea);
 
-    const date = getCellText(dateCell);
+    const date = text(dateCell);
     if (date) {
-      const dateElement = document.createElement('p');
-      dateElement.className = 'upcoming-event-date';
-
-      const calendar = document.createElement('span');
-      calendar.className = 'upcoming-event-calendar';
-      calendar.setAttribute('aria-hidden', 'true');
-      calendar.textContent = '▦';
-
-      const dateText = document.createElement('span');
-      dateText.textContent = date;
-
-      dateElement.append(calendar, dateText);
-      card.append(dateElement);
+      const p = document.createElement('p');
+      p.className = 'upcoming-event-date';
+      const cal = document.createElement('span');
+      cal.className = 'upcoming-event-calendar';
+      cal.setAttribute('aria-hidden', 'true');
+      cal.textContent = '▦';
+      const span = document.createElement('span');
+      span.textContent = date;
+      p.append(cal, span);
+      card.append(p);
     }
 
-    const title = getCellText(titleCell);
+    const title = text(titleCell);
     if (title) {
-      const titleElement = document.createElement('h3');
-      titleElement.className = 'upcoming-event-title';
-      titleElement.textContent = title;
-      card.append(titleElement);
+      const h3 = document.createElement('h3');
+      h3.className = 'upcoming-event-title';
+      h3.textContent = title;
+      card.append(h3);
     }
 
-    const eventLink = getCellLink(linkCell);
+    const eventLink = linkCell?.querySelector('a');
     if (eventLink) {
-      const link = document.createElement('a');
-      link.className = 'upcoming-event-link';
-      link.href = eventLink.href;
-      link.textContent = getCellText(linkCell) || 'View event';
-      card.append(link);
+      const a = document.createElement('a');
+      a.className = 'upcoming-event-link';
+      a.href = eventLink.href;
+      a.textContent = 'View event';
+      card.append(a);
     }
 
     cards.append(card);
   });
 
-  block.replaceChildren(sectionHeader, cards);
+  block.replaceChildren(header, cards);
 }

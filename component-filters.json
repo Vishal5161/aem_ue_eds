@@ -43,13 +43,9 @@
     ]
   },
   {
-  "id": "product-search",
-  "components": [
-    "product-search"
-  ]
-},
-{
-  "id": "upcoming-events",
-  "components": ["upcoming-event"]
-}
+    "id": "upcoming-events",
+    "components": [
+      "upcoming-event"
+    ]
+  }
 ]

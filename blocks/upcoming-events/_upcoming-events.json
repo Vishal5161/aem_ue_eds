@@ -1,0 +1,98 @@
+{
+  "definitions": [
+    {
+      "title": "Upcoming Events",
+      "id": "upcoming-events",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Upcoming Events",
+              "model": "upcoming-events",
+              "filter": "upcoming-events"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Upcoming Event",
+      "id": "upcoming-event",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Upcoming Event",
+              "model": "upcoming-event"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "upcoming-events",
+      "fields": [
+        {
+          "component": "text",
+          "name": "heading",
+          "label": "Section Heading",
+          "value": "Upcoming events",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "name": "seeAllLink",
+          "label": "See All Events Link"
+        },
+        {
+          "component": "text",
+          "name": "seeAllText",
+          "label": "See All Link Text",
+          "value": "See all events",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "upcoming-event",
+      "fields": [
+        {
+          "component": "reference",
+          "name": "image",
+          "label": "Event Image",
+          "valueType": "string",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "name": "date",
+          "label": "Event Date",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Event Title",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "name": "eventLink",
+          "label": "Event Link"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "upcoming-events",
+      "components": [
+        "upcoming-event"
+      ]
+    }
+  ]
+}
