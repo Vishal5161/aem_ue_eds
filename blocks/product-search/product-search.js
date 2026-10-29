@@ -1,11 +1,9 @@
 export default function decorate(block) {
   const rows = [...block.children];
 
-  const placeholder =
-    rows[0]?.textContent.trim() || 'Search products...';
+  const placeholder = rows[0]?.textContent.trim() || 'Search products...';
 
-  const buttonText =
-    rows[1]?.textContent.trim() || 'Search';
+  const buttonText = rows[1]?.textContent.trim() || 'Search';
 
   block.innerHTML = `
     <form class="product-search__form" role="search">

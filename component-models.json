@@ -298,14 +298,6 @@
     },
     {
       "component": "text",
-      "name": "category",
-      "label": "Event Category",
-      "value": "Conference",
-      "valueType": "string",
-      "required": true
-    },
-    {
-      "component": "text",
       "name": "date",
       "label": "Event Date",
       "valueType": "string",

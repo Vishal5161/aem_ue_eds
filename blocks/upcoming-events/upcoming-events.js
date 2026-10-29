@@ -1,4 +1,3 @@
-
 /*
  * Upcoming Events block
  *
