@@ -259,5 +259,70 @@
       "required": true
     }
   ]
+},
+
+{
+  "id": "upcoming-events",
+  "fields": [
+    {
+      "component": "text",
+      "name": "heading",
+      "label": "Section Heading",
+      "value": "Upcoming events",
+      "valueType": "string",
+      "required": true
+    },
+    {
+      "component": "aem-content",
+      "name": "seeAllLink",
+      "label": "See All Events Link"
+    },
+    {
+      "component": "text",
+      "name": "seeAllText",
+      "label": "See All Link Text",
+      "value": "See all events",
+      "valueType": "string"
+    }
+  ]
+},
+{
+  "id": "upcoming-event",
+  "fields": [
+    {
+      "component": "reference",
+      "name": "image",
+      "label": "Event Image",
+      "valueType": "string",
+      "multi": false
+    },
+    {
+      "component": "text",
+      "name": "category",
+      "label": "Event Category",
+      "value": "Conference",
+      "valueType": "string",
+      "required": true
+    },
+    {
+      "component": "text",
+      "name": "date",
+      "label": "Event Date",
+      "valueType": "string",
+      "required": true
+    },
+    {
+      "component": "text",
+      "name": "title",
+      "label": "Event Title",
+      "valueType": "string",
+      "required": true
+    },
+    {
+      "component": "aem-content",
+      "name": "eventLink",
+      "label": "Event Link"
+    }
+  ]
 }
 ]
