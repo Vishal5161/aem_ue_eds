@@ -22,6 +22,12 @@
     ]
   },
   {
+    "id": "banner-nav",
+    "components": [
+      "banner-nav-link"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
