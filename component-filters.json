@@ -18,8 +18,7 @@
       "fragment",
       "carousel",
       "product-search",
-      "upcoming-events",
-      "upcoming-event"
+      "upcoming-events"
     ]
   },
   {
@@ -50,15 +49,7 @@
   ]
 },
 {
-    "id": "upcoming-events",
-    "components": [
-      "upcoming-events"
-    ]
-  },
-  {
-    "id": "upcoming-event",
-    "components": [
-      "upcoming-event"
-    ]
-  }
+  "id": "upcoming-events",
+  "components": ["upcoming-event"]
+}
 ]
