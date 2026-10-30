@@ -6,14 +6,14 @@ export default function decorate(block) {
   const buttonText = rows[1]?.textContent.trim() || 'Search';
 
   block.innerHTML = `
-    <form class="product-search__form" role="search">
+    <form class="product-search-form" role="search">
       <input
-        class="product-search__input"
+        class="product-search-input"
         type="search"
         placeholder="${placeholder.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')}"
         aria-label="Search products"
       />
-      <button class="product-search__button" type="submit">
+      <button class="product-search-button" type="submit">
         ${buttonText.replace(/&/g, '&amp;').replace(/</g, '&lt;')}
       </button>
     </form>

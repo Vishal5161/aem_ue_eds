@@ -71,7 +71,7 @@
   width: 40px;
   height: 24px;
   fill: none;
-  stroke: currentColor;
+  stroke: currentcolor;
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -92,7 +92,7 @@
   border-radius: 6px;
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .carousel {
     padding: 0 16px;
   }

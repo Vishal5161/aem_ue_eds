@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 
-.product-search__form {
+.product-search-form {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -14,7 +14,7 @@
   background: #fff;
 }
 
-.product-search__input {
+.product-search-input {
   flex: 1;
   min-width: 0;
   padding: 12px;
@@ -24,7 +24,7 @@
   font-size: 16px;
 }
 
-.product-search__button {
+.product-search-button {
   padding: 12px 22px;
   border: none;
   border-radius: 7px;

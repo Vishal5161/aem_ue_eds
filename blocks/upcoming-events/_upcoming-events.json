@@ -45,7 +45,7 @@
         },
         {
           "component": "aem-content",
-          "name": "seeAllLink",
+          "name": "seeAll",
           "label": "See All Events Link"
         },
         {

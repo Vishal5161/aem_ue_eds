@@ -3,12 +3,10 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 /*
  * Upcoming Events block (Universal Editor / xwalk)
  *
- * Authored structure (one row per model field for the container,
- * one row per item, one cell per item field):
+ * Authored structure (seeAll + seeAllText collapse into one link cell):
  *   Row 1:   heading                         (1 cell)
- *   Row 2:   see-all link                    (1 cell)
- *   Row 3:   see-all link text               (1 cell)
- *   Rows 4+: image | date | title | link     (4 cells, one row per event)
+ *   Row 2:   see-all link (<a> with text)    (1 cell)
+ *   Rows 3+: image | date | title | link     (4 cells, one row per event)
  */
 
 const text = (cell) => cell?.textContent?.trim() || '';
@@ -22,10 +20,10 @@ export default function decorate(block) {
   const configRows = rows.filter((row) => !isEventRow(row));
   const eventRows = rows.filter(isEventRow);
 
-  const [headingRow, linkRow, linkTextRow] = configRows;
+  const [headingRow, linkRow] = configRows;
   const heading = text(headingRow) || 'Upcoming events';
   const headerLink = linkRow?.querySelector('a');
-  const linkLabel = text(linkTextRow) || 'See all events';
+  const linkLabel = headerLink?.textContent.trim() || 'See all events';
 
   const header = document.createElement('div');
   header.className = 'upcoming-events-header';

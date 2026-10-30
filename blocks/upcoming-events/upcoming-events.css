@@ -124,7 +124,7 @@
   text-decoration: underline;
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .upcoming-events {
     padding: 48px 20px;
   }
@@ -139,7 +139,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .upcoming-events {
     padding: 36px 16px;
   }
